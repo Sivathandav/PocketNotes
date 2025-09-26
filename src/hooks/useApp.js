@@ -4,7 +4,12 @@ import { STORAGE_KEYS, COLORS } from '../utils/constants';
 import { getInitials, formatDateTime } from '../utils/helpers';
 
 export const useGroups = () => {
-  const [groups, setGroups] = useState(() => storage.get(STORAGE_KEYS.GROUPS));
+  // const [groups, setGroups] = useState(() => storage.get(STORAGE_KEYS.GROUPS));
+
+  const [groups, setGroups] = useState(() => {
+  const saved = storage.get(STORAGE_KEYS.GROUPS);
+  return Array.isArray(saved) ? saved : [];
+  });
 
   const saveGroups = useCallback((newGroups) => {
     setGroups(newGroups);
